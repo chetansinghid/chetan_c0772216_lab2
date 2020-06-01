@@ -1,0 +1,64 @@
+<html>
+	<font size="8" color="green">Final test lab</font><br><br>
+	Number of rows: <input type="text" id="t1" /><br><br>
+	Number of cols: <input type="text" id="t2" /><br><br>
+	
+	<button id="b1" onclick="generateTable()">Generate Table</button><br><br>
+	
+	<button id="b2" onclick="addColumn()">Add Column</button>
+	
+	<button id="b3" onclick="addRow()">Add Row</button>
+		
+	<script language="javascript">
+		function generateTable() {
+			// gets value for no of rows and columns
+			if(document.getElementById('t1')) {
+				rows = 	parseInt(document.getElementById('t1').value);
+				columns = parseInt(document.getElementById('t2').value);
+			}
+			else {
+				rows += 1;
+			}
+			console.log(rows + ' ' + columns);
+			// creates table element
+			document.write("<body>");
+			document.write("<table>");
+			document.write("</table>");
+			document.write("</body>");
+			// selects table element
+			var table = document.querySelector("table");
+			// add border for cells
+			table.border = "1";
+			for (var i = 1; i <= rows; i++) {
+				let row = table.insertRow();
+				for (var j = 1; j <= columns; j++) {
+					let cell = row.insertCell();
+					let text = document.createTextNode("row "+ i +" column " +j);
+					cell.appendChild(text);
+				}
+			}
+			document.write('<button id="b2" onclick="addColumn()">Add Column</button>');
+			document.write('<button id="b3" onclick="addRow()">Add Row</button>');
+			console.log('after button' + i + '' + j);
+		}
+		
+		function addRow() {
+			document.querySelector('body').innerHTML = '';
+			generateTable();
+		}	
+
+		function addColumn() {
+			let table = document.querySelector('table');
+			let rowNum = table.rows.length;
+			columns = table.rows[0].cells.length + 1;
+			for (let j = 1; j <= rowNum; j++) {
+					let row = table.rows[j-1];
+					let cell = row.insertCell();
+					let text = document.createTextNode('row ' + j + ' column ' + columns);
+					cell.appendChild(text);
+			}
+		} 
+
+	</script>
+	
+</html>
